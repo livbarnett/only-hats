@@ -6,38 +6,94 @@
   </div>
   <div class="row">
     <% @hats.each do |hat| %>
-        <div class="col-md-4">
-          <div class="hat-card">
-            <div class="hat-card-image" style="background-image: url('<%= cl_image_path hat.photo.key, height: 300, crop: :fill %>')"></div>
-            <div class="hat-card-content">
-              <div class="hat-card-title">
-                <h4><%= hat.type %></h4>
+      <div class="col-md-4">
+        <div class="hat-card">
+          <div class="hat-card-image" style="background-image: url('<%= cl_image_path hat.photo.key, height: 300, crop: :fill %>')"></div>
+          <div class="hat-card-content">
+            <div class="hat-card-title">
+              <h4><%= hat.type %></h4>
+            </div>
+            <p><%= hat.description %></p>
+            <div class="flex">
+              <div class="flex align-items-center">
+                <i class="fa-sharp fa-solid fa-location-dot me-1"></i>
+                <span><%= hat.location %></span>
               </div>
-              <p><%= hat.description %></p>
-              <div class="flex">
-                <div class="flex align-items-center">
-                  <i class="fa-sharp fa-solid fa-location-dot me-1"></i>
-                  <span><%= hat.location %></span>
-                </div>
-                <div class="flex align-items-center ms-3">
-                  <i class="fa-solid fa-hat-cowboy me-1"></i>
-                  <span><%= hat.size %></span>
-                </div>
-                <div class="flex align-items-center ms-3">
-                  <i class="fa-solid fa-palette me-1"></i>
-                  <span><%= hat.color %></span>
-                </div>
-                <div class="flex align-items-center ms-3">
-                  <i class="fa-solid fa-sterling-sign me-1"></i>
-                  <span><%= number_to_currency(hat.day_rate, unit: "") %> per day</span>
-                </div>
+              <div class="flex align-items-center ms-3">
+                <i class="fa-solid fa-hat-cowboy me-1"></i>
+                <span><%= hat.size %></span>
+              </div>
+              <div class="flex align-items-center ms-3">
+                <i class="fa-solid fa-palette me-1"></i>
+                <span><%= hat.color %></span>
+              </div>
+              <div class="flex align-items-center ms-3">
+                <i class="fa-solid fa-sterling-sign me-1"></i>
+                <span><%= number_to_currency(hat.day_rate, unit: "") %> / day</span>
               </div>
             </div>
-            <div class="hat-card-actions">
-              <%= link_to "See more", hat_path(hat) %>
+          </div>
+          <div class="hat-card-actions">
+            <%= link_to "See more", hat_path(hat) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="listings">
+      <% @hats.each do |hat| %>
+        <div class="col-md-6">
+          <div class="listings__item">
+            <div class="listings__image">
+              <button>
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+              <%= link_to hat_path(hat) do %>
+                <%= cl_image_tag hat.photo.key, height: 300, crop: :fill %>
+              <% end %>
+            </div>
+            <div class="listings__content">
+              <div class="listings__title">
+                <div class="listings__icon__text">
+                  <span class="greyText"><%= hat.type %></span>
+                  <h2><%= hat.description %></h2>
+                </div>
+                <div class="listings__title__icon">
+                  <button>
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="listings__description">
+                <span class="greyText"><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= hat.location %></span>
+                <span class="greyText"><%= hat.size %>cm · <%= hat.color %></span>
+              </div>
+              <div class="listings__details">
+                <div class="listings__rating">
+                  <i class="fa-solid fa-star"></i>
+                  <span><%= rand(3..5) %> <span>(<%= rand(1..100) %>)</span></span>
+                </div>
+                <div class="listings__price">
+                  <div class="listings__price__night">
+                    <%= number_to_currency(hat.day_rate, unit: "£") %> <span> / day</span>
+                  </div>
+                  <div class="listings__price__total">
+                    <span><%= number_to_currency(hat.day_rate * 3, unit: "£") %></span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       <% end %>
     </div>
+  </div>
 </div>

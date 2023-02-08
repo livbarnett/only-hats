@@ -1,0 +1,159 @@
+.listings {
+	&__details {
+		display: flex;
+		justify-content: space-between;
+		margin-top: auto;
+	}
+	&__price {
+		text-align: right;
+		display: flex;
+		flex-direction: column;
+		&__night {
+			font-size: 18px;
+			font-family: 'Circular Bold';
+			span {
+				color: #484848;
+				font-family: 'Circular Book';
+			}
+		}
+		&__total {
+			font-size: 14px;
+			color: var(--grey-text-light);
+			text-decoration: underline;
+			margin-top: 2px;
+		}
+	}
+	&__rating {
+		display: flex;
+		margin-top: auto;
+		img {
+			width: 14px;
+			margin-right: 4px;
+		}
+		span {
+			font-family: 'Circular Medium';
+			span {
+				font-family: 'Circular Book';
+				color: var(--grey-text-light);
+			}
+		}
+	}
+	&__description {
+		padding-top: 15px;
+		span {
+			display: block;
+			margin-bottom: 5px;
+		}
+	}
+	&__item {
+		border-top: 1px solid #ebebeb;
+		padding: 24px 0;
+		display: flex;
+		&:hover {
+			.listings__image {
+				button {
+					opacity: 0.7;
+				}
+			}
+		}
+	}
+	&__image {
+		width: 300px;
+		height: 200px;
+		border-radius: 10px;
+		overflow: hidden;
+		position: relative;
+		button {
+			position: absolute;
+			top: 50%;
+			width: 32px;
+			height: 32px;
+			background: white;
+			border-radius: 50%;
+			overflow: hidden;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: none;
+			opacity: 0;
+			transition: 0.1s ease-in;
+			cursor: pointer;
+			&:hover {
+				opacity: 1 !important;
+			}
+			img {
+				width: 10px;
+				height: 10px;
+			}
+			&:first-of-type {
+				left: 10px;
+			}
+			&:last-of-type {
+				right: 10px;
+			}
+		}
+		img {
+			object-fit: cover;
+			height: 100%;
+			width: 100%;
+		}
+	}
+	&__title {
+		display: flex;
+		justify-content: space-between;
+		button {
+			background: none;
+			border: none;
+			outline: none;
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			padding: 0;
+			cursor: pointer;
+			&:hover {
+				&:after {
+					opacity: 1;
+				}
+			}
+			&:after {
+				opacity: 0;
+				background: var(--grey-light);
+				position: absolute;
+				content: '';
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				z-index: -1;
+			}
+		}
+		h2 {
+			font-size: 18px;
+			font-family: 'Circular Book';
+			color: var(--grey-text-dark);
+			margin: 5px 0 15px;
+			font-weight: 400;
+		}
+	}
+	&__content {
+		width: calc(100% - 300px);
+		padding-left: 15px;
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.greyText {
+	font-size: 14px;
+	line-height: 18px;
+	color: var(--grey-text-light);
+	font-family: 'Circular Light';
+}
+
+.separator {
+	width: 32px;
+	height: 1px;
+	background: var(--grey-med);
+}
