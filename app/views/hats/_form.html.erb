@@ -1,0 +1,10 @@
+<%= simple_form_for(@hat) do |f| %>
+  <%= f.input :size %>
+  <%= f.input :location %>
+  <%= f.input :type %>
+  <%= f.input :color %>
+  <%= f.input :description %>
+  <%= f.input :day_rate %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit %>
+<% end %>
