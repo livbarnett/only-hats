@@ -1,0 +1,43 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <h1>All our hats (<%= @hats.count %>)</h1>
+    </div>
+  </div>
+  <div class="row">
+    <% @hats.each do |hat| %>
+        <div class="col-md-4">
+          <div class="hat-card">
+            <div class="hat-card-image" style="background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200')"></div>
+            <div class="-card-content">
+              <div class="hat-card-title">
+                <h4><%= hat.type %></h4>
+              </div>
+              <p><%= hat.description %></p>
+              <div class="flex">
+                <div class="flex align-items-center">
+                  <i class="fa-sharp fa-solid fa-location-dot"></i>
+                  <span><%= hat.location %></span>
+                </div>
+                <div class="flex align-items-center ms-3">
+                  <i class="fa-solid fa-hat-cowboy"></i>
+                  <span><%= hat.size %></span>
+                </div>
+                <div class="flex align-items-center ms-3">
+                  <i class="fa-solid fa-palette"></i>
+                  <span><%= hat.color %></span>
+                </div>
+                <div class="flex align-items-center ms-3">
+                  <i class="fa-solid fa-sterling-sign"></i>
+                  <span><%= hat.day_rate %></span>
+                </div>
+              </div>
+            </div>
+            <div class="hat-card-actions">
+              <%= link_to "More info", hat_path(hat) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+</div>
