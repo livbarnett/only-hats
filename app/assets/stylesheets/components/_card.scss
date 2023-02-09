@@ -1,0 +1,35 @@
+.flex {
+  display: flex;
+}
+.flex-align {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hat-card {
+  width: 100%;
+  position: relative;
+  margin: .5rem 0 1rem 0;
+  background-color: #fff;
+  border-radius: 50px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.hat-card-image {
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+}
+
+.hat-card-content {
+  padding: 24px;
+  background-color: #F8F9FA;
+}
+
+.hat-card-actions {
+  position: relative;
+  background-color: inherit;
+  border-top: 1px solid rgba(160,160,160,0.2);
+  padding: 16px 24px;
+}
