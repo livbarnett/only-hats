@@ -1,9 +1,22 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200')">
-  <div class="container">
-    <h1><%= @hat.type %></h1>
-    <p><%= @hat.description %></p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2><%= @hat.description %></h2>
+      <i class="fa-solid fa-star"></i>
+      <span><%= rand(3..5) %> (<%= rand(1..100) %>)</span>
+      <span><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= @hat.location %></span>
+      <div class="hat-card-image rounded-4" style="background-image: url('<%= cl_image_path @hat.photo.key, height: 800, crop: :fill %>')"> <h4 class="hat-card-type"><%= @hat.type %></h4></div>
+          <div class="hat-card-content">
+            <div class="hat-card-title">
+            </div>
+            <%= @hat.size %>cm · <%= @hat.color %>
+          </div>
+    </div>
+    <div class="col-sm-4">
+      <h3>Book this hat</h3>
+      <p><%= number_to_currency(@hat.day_rate, unit: "£") %> / day</p>
+      <%= render 'bookings/form' %>
+      <%= link_to "All Hats", hats_path %>
+    </div>
   </div>
 </div>
-
-<h2>Book this hat:</h2>
-<%= render 'bookings/form' %>
