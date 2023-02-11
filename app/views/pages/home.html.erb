@@ -7,46 +7,28 @@
   <div class="container">
     <h1>OnlyHats brings you the head...gear of your dreams</h1>
     <p>Your hat rental is just one stroke of the mouse away</p>
-    <a class="btn btn-flat" href="#" fontcolor="#ffffff">Browse our selection of haute hats </a>
   </div>
 </div>
 
-<div class="card-trip">
-  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-  <div class="card-trip-infos">
-    <div>
-      <h2>Modest Hats</h2>
-      <p>Short description here!</p>
+<div class="top-hat container">
+  <% @hats.each do |hat| %>
+    <div class="card-trip">
+      <img src="https://images.unsplash.com/photo-1533055640609-24b498dfd74c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80" />
+      <div class="card-trip-infos">
+        <div>
+          <h2> <%= hat.location %> </h2>
+          <p> <%= hat.description %> </p>
+          <p><%= hat.size %></p>
+        </div>
+        <h2 class="card-trip-pricing">£99.99</h2>
+        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+      </div>
     </div>
-    <h2 class="card-trip-pricing">£99.99</h2>
-    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-  </div>
-</div>
-
-<div class="card-trip">
-  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-  <div class="card-trip-infos">
-    <div>
-      <h2>PG-13 Hats</h2>
-      <p>Short description here!</p>
-    </div>
-    <h2 class="card-trip-pricing">£99.99</h2>
-    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-  </div>
-</div>
-
-<div class="card-trip">
-  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-  <div class="card-trip-infos">
-    <div>
-      <h2>X-rated hats</h2>
-      <p>Short description here!</p>
-    </div>
-    <h2 class="card-trip-pricing">£99.99</h2>
-    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-  </div>
+  <% end %>
 </div>
 
 
 
-    <button>Browse our body of work</button>
+
+
+    <%# <button>Browse our body of work</button> %>
