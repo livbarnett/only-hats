@@ -1,2 +1,34 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<div class="banner">
+  <div class="container">
+    <h1>OnlyHats brings you the head...gear of your dreams</h1>
+    <p>Your hat rental is just one stroke of the mouse away</p>
+  </div>
+</div>
+
+<div class="top-hat container">
+  <% @hats.each do |hat| %>
+    <div class="card-trip">
+      <img src="https://images.unsplash.com/photo-1533055640609-24b498dfd74c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80" />
+      <div class="card-trip-infos">
+        <div>
+          <h2> <%= hat.location %> </h2>
+          <p> <%= hat.description %> </p>
+          <p><%= hat.size %></p>
+        </div>
+        <h2 class="card-trip-pricing">£99.99</h2>
+        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+    <%# <button>Browse our body of work</button> %>
