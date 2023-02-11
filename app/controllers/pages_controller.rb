@@ -3,4 +3,8 @@ class PagesController < ApplicationController
   def home
     @hats = Hat.all
   end
+
+  def profile
+    @hats = Hat.all
+  end
 end
