@@ -10,6 +10,7 @@ class HatsController < ApplicationController
 
   def show
     @hat = Hat.find(params[:id])
+    @booking = Booking.new
   end
 
   def new

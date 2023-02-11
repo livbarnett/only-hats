@@ -4,38 +4,31 @@
       <h1>All our hats (<%= @hats.count %>)</h1>
     </div>
   </div>
+
   <div class="row">
     <% @hats.each do |hat| %>
       <div class="col-md-4">
         <div class="hat-card">
-          <div class="hat-card-image" style="background-image: url('<%= cl_image_path hat.photo.key, height: 300, crop: :fill %>')"></div>
+          <%= link_to hat_path(hat) do %>
+            <div class="hat-card-image rounded-4" style="background-image: url('<%= cl_image_path hat.photo.key, height: 300, crop: :fill %>')"> <h4 class="hat-card-type"><%= hat.type %></h4></div>
           <div class="hat-card-content">
             <div class="hat-card-title">
-              <h4><%= hat.type %></h4>
+              <h4><span><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= hat.location %></span></h4>
             </div>
-            <p><%= hat.description %></p>
-            <div class="flex">
-              <div class="flex align-items-center">
-                <i class="fa-sharp fa-solid fa-location-dot me-1"></i>
-                <span><%= hat.location %></span>
-              </div>
-              <div class="flex align-items-center ms-3">
-                <i class="fa-solid fa-hat-cowboy me-1"></i>
-                <span><%= hat.size %></span>
-              </div>
-              <div class="flex align-items-center ms-3">
-                <i class="fa-solid fa-palette me-1"></i>
-                <span><%= hat.color %></span>
-              </div>
-              <div class="flex align-items-center ms-3">
-                <i class="fa-solid fa-sterling-sign me-1"></i>
-                <span><%= number_to_currency(hat.day_rate, unit: "") %> / day</span>
-              </div>
-            </div>
+            <%= hat.size %>cm · <%= hat.color %>
           </div>
           <div class="hat-card-actions">
-            <%= link_to "See more", hat_path(hat) %>
+            <div class="flex">
+                <div class="flex align">
+                  <i class="fa-solid fa-star"></i>
+                  <span><%= rand(3..5) %> (<%= rand(1..100) %>)</span>
+                </div>
+                <div class="flex align">
+                  <span><%= number_to_currency(hat.day_rate, unit: "£") %> / day</span>
+                </div>
+              </div>
           </div>
+          <% end %>
         </div>
       </div>
     <% end %>
