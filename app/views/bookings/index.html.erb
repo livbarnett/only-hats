@@ -1,0 +1,23 @@
+<h1>My Bookings</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Hat</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.try(:each) do |booking| %>
+      <tr>
+        <td><%= booking.hat.type %></td>
+        <td><%= booking.start_date %></td>
+        <td><%= booking.end_date %></td>
+        <td><%= booking.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
