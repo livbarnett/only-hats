@@ -3,10 +3,11 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Hat</th>
+      <th>ID</th>
       <th>Start Date</th>
       <th>End Date</th>
-      <th>ID</th>
+      <th>Hat</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,8 @@
         <td><%= booking.start_date %></td>
         <td><%= booking.end_date %></td>
         <td><%= booking.id %></td>
+        <td><%= booking.status %>
+        </td>
       </tr>
     <% end %>
   </tbody>
