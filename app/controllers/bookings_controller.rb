@@ -6,10 +6,14 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.hat = @hat
     if @booking.save
-      redirect_to hat_path(@hat), notice: "Booking request was successfully made."
+      redirect_to bookings_path, notice: "Booking request was successfully made."
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def index
+    @bookings = Booking.where(user: current_user)
   end
 
   private
