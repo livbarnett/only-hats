@@ -1,15 +1,15 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-sm-8">
-      <h2><%= @hat.description %></h2>
       <i class="fa-solid fa-star"></i>
       <span><%= rand(3..5) %> (<%= rand(1..100) %>)</span>
       <span><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= @hat.location %></span>
-      <div class="hat-show-image rounded-4" style="background-image: url('<%= cl_image_path @hat.photo.key, height: 800, crop: :fill %>')"> <h4 class="hat-show-type"><%= @hat.type %></h4></div>
+      <div class="hat-show-image" style="background-image: url('<%= cl_image_path @hat.photo.key, crop: :fill %>')"> <h4 class="hat-show-type"><%= @hat.type %></h4></div>
           <div class="hat-card-content">
             <div class="hat-card-title">
             </div>
             <%= @hat.size %>cm · <%= @hat.color %>
+            <p><%= @hat.description %></p>
           </div>
     </div>
     <div class="col-sm-4">
@@ -17,6 +17,19 @@
       <p><%= number_to_currency(@hat.day_rate, unit: "£") %> / day</p>
       <%= render 'bookings/form' %>
       <%= link_to "All Hats", hats_path %>
+      <h3>Reviews for <%= @hat.type %></h3>
+      <% @reviews.each do |review| %>
+        <div>
+          <p><%= review.content %></p>
+          <% rating = review.rating %>
+          <% (1..rating).each do %>
+            <i class="fas fa-star"></i>
+          <% end %>
+          <% (rating...5).each do %>
+            <i class="far fa-star"></i>
+          <% end %></p>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

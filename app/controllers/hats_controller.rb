@@ -11,6 +11,7 @@ class HatsController < ApplicationController
   def show
     @hat = Hat.find(params[:id])
     @booking = Booking.new
+    @reviews = @hat.bookings.map { |booking| booking.review if booking.review }.compact
   end
 
   def new

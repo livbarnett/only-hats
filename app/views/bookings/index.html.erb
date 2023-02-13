@@ -3,20 +3,20 @@
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Hat</th>
       <th>Start Date</th>
       <th>End Date</th>
-      <th>Hat</th>
       <th>Status</th>
     </tr>
   </thead>
   <tbody>
-    <% @bookings.try(:each) do |booking| %>
+    <% @bookings.each do |booking| %>
       <tr>
         <td><%= booking.hat.type %></td>
         <td><%= booking.start_date %></td>
         <td><%= booking.end_date %></td>
         <td><%= booking.status %></td>
+        <td><%= link_to "Review booking", new_booking_review_path(booking_id: booking.id) %></td>
       </tr>
     <% end %>
   </tbody>
