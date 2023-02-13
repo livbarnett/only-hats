@@ -16,9 +16,11 @@
         <td><%= booking.start_date %></td>
         <td><%= booking.end_date %></td>
         <td>
-          <% if booking.end_date < Time.now %>
+          <% if booking.end_date < Time.now && booking.review.nil? %>
             <%= link_to "Review hat", new_booking_review_path(booking_id: booking.id) %>
-          <% elsif booking.status %>
+          <% elsif booking.end_date < Time.now && booking.review %>
+            <%= link_to "Review submitted", hat_path(booking.hat) %>
+          <% elsif booking.status == true %>
             <%= "Booking accepted" %>
           <% else %>
             <%= "Booking pending" %>

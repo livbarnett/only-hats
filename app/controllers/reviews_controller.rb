@@ -9,9 +9,9 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.booking = @booking
     if @review.save
-      redirect_to bookings_path, notice: "Review was successfully created."
+      redirect_to hat_path(@booking.hat), notice: "Review was successfully created."
     else
-      render 'bookings', status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

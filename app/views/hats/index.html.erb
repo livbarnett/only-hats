@@ -7,26 +7,37 @@
 
   <div class="row">
     <% @hats.each do |hat| %>
+      <% reviews = hat.bookings.map(&:review).compact %>
+      <% ratings = reviews.pluck(:rating) %>
+      <% total_ratings = ratings.sum %>
+      <% review_count = reviews.count %>
+      <% average_rating = total_ratings.to_f / review_count %>
       <div class="col-md-4">
         <div class="hat-card">
           <%= link_to hat_path(hat) do %>
             <div class="hat-card-image rounded-4" style="background-image: url('<%= cl_image_path hat.photo.key, height: 300, crop: :fill %>')"> <h4 class="hat-card-type"><%= hat.type %></h4></div>
-          <div class="hat-card-content">
-            <div class="hat-card-title">
-              <h4><span><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= hat.location %></span></h4>
-            </div>
+            <div class="hat-card-content">
+              <div class="hat-card-title">
+                <div class="flex">
+                  <div class="flex align">
+                    <p class="lead">Hat name here</p>
+                  </div>
+                  <div class="flex align">
+                    <i class="fa-solid fa-star"></i> <%= average_rating %>
+                  </div>
+                </div>
+              </div>
             <%= hat.size %>cm · <%= hat.color %>
           </div>
           <div class="hat-card-actions">
             <div class="flex">
-                <div class="flex align">
-                  <i class="fa-solid fa-star"></i>
-                  <span><%= rand(3..5) %> (<%= rand(1..100) %>)</span>
-                </div>
-                <div class="flex align">
-                  <span><%= number_to_currency(hat.day_rate, unit: "£") %> / day</span>
-                </div>
+              <div class="flex align">
+                <i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= hat.location %>
               </div>
+              <div class="flex align">
+                <%= number_to_currency(hat.day_rate, unit: "£") %> / day
+              </div>
+            </div>
           </div>
           <% end %>
         </div>
