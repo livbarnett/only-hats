@@ -12,11 +12,18 @@
   <tbody>
     <% @bookings.each do |booking| %>
       <tr>
-        <td><%= booking.hat.type %></td>
+        <td><%= link_to booking.hat.type, hat_path(booking.hat) %></td>
         <td><%= booking.start_date %></td>
         <td><%= booking.end_date %></td>
-        <td><%= booking.status %></td>
-        <td><%= link_to "Review booking", new_booking_review_path(booking_id: booking.id) %></td>
+        <td>
+          <% if booking.end_date < Time.now %>
+            <%= link_to "Review hat", new_booking_review_path(booking_id: booking.id) %>
+          <% elsif booking.status %>
+            <%= "Booking accepted" %>
+          <% else %>
+            <%= "Booking pending" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

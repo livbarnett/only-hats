@@ -21,7 +21,7 @@ class HatsController < ApplicationController
   def create
     @hat = Hat.new(hat_params)
     if @hat.save
-      redirect_to @hat, notice: "hat was successfully created."
+      redirect_to @hat, notice: "Hat was successfully created."
     else
       render :new, status: :unprocessable_entity
     end

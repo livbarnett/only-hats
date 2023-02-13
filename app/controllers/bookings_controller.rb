@@ -8,7 +8,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to bookings_path, notice: "Booking request was successfully made."
     else
-      render :new, status: :unprocessable_entity
+      redirect_to hat_path(@booking.hat), alert: "Booking could not be created."
     end
   end
 
