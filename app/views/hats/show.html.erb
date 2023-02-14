@@ -5,7 +5,7 @@
       <% total_ratings = ratings.sum %>
       <% review_count = @reviews.count %>
       <% average_rating = total_ratings.to_f / review_count %>
-      <h2>Hat name here</h2>
+      <h2><%= @hat.name %></h2>
       <p class ="text-muted"><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= @hat.location %></p>
       <div class="hat-show-image" style="background-image: url('<%= cl_image_path @hat.photo.key, crop: :fill %>')"> <h4 class="hat-show-type"><%= @hat.type %></h4></div>
           <div class="hat-card-content">
