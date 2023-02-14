@@ -4,14 +4,18 @@ Rails.application.routes.draw do
 
   get "pages/profile", to: "pages#profile"
 
-  resources :hats, only: %i[new create edit update index show]
-  resources :bookings do
-    resources :reviews, only: %i[create]
+  resources :bookings, except: %i[create]
+  resources :hats, only: %i[new create edit update index show] do
+    resources :bookings, only: %i[create] do
+      resources :reviews, only: %i[create]
+    end
   end
-
+  resources :bookings, only: [:index]
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
 
 end
+
