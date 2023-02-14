@@ -1,13 +1,17 @@
 class ReviewsController < ApplicationController
-  before_action :set_booking, only: %i[create]
+  before_action :set_booking, only: %i[new create]
+
+  def new
+    @review = Review.new
+  end
 
   def create
     @review = Review.new(review_params)
     @review.booking = @booking
     if @review.save
-      redirect_to booking_path(@booking)
+      redirect_to hat_path(@booking.hat), notice: "Review was successfully created."
     else
-      render 'bookings/show', status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -18,6 +22,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:content, :rating)
+    params.require(:review).permit(:content, :rating, :booking_id)
   end
 end

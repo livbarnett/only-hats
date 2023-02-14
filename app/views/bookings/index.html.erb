@@ -3,20 +3,29 @@
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Hat</th>
       <th>Start Date</th>
       <th>End Date</th>
-      <th>Hat</th>
       <th>Status</th>
     </tr>
   </thead>
   <tbody>
-    <% @bookings.try(:each) do |booking| %>
+    <% @bookings.each do |booking| %>
       <tr>
-        <td><%= booking.hat.type %></td>
+        <td><%= link_to booking.hat.type, hat_path(booking.hat) %></td>
         <td><%= booking.start_date %></td>
         <td><%= booking.end_date %></td>
-        <td><%= booking.status %></td>
+        <td>
+          <% if booking.end_date < Time.now && booking.review.nil? %>
+            <%= link_to "Review hat", new_booking_review_path(booking_id: booking.id) %>
+          <% elsif booking.end_date < Time.now && booking.review %>
+            <%= link_to "Review submitted", hat_path(booking.hat) %>
+          <% elsif booking.status == true %>
+            <%= "Booking accepted" %>
+          <% else %>
+            <%= "Booking pending" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
