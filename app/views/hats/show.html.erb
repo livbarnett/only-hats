@@ -5,24 +5,25 @@
 
 <div class="container mt-3">
   <div class="row justify-content-evenly">
-    <div class="p-3 col-sm-7">
+    <div class="p-2 col-sm-7">
       <h2><%= @hat.name %></h2>
+        <p class="lead"><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= @hat.location %></p>
     </div>
-    <div class="p-3 col-sm-3">
+    <div class="p-2 col-sm-3">
     </div>
   </div>
   <div class="row justify-content-evenly">
-    <div class="p-3 col-sm-7">
-      <div class="hat-show-image mb-3" style="background-image: url('<%= cl_image_path @hat.photo.key, crop: :fill %>')"> <h4 class="hat-show-type"><%= @hat.type %></h4></div>
+    <div class="p-2 col-sm-7">
+      <div class="hat-show-image mb-3" style="background-image: url('<%= cl_image_path @hat.photo.key, crop: :fill %>')"></div>
           <div class="border-bottom border-secondary-subtle mb-3">
-            <p class="text-muted"><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= @hat.location %> · <%= @hat.size %>cm · <%= @hat.color %></p>
+            <p class="text-muted"><%= @hat.type %> · <%= @hat.size %>cm · <%= @hat.color %></p>
           </div>
           <div class="border-bottom border-secondary-subtle mb-3">
             <p><%= @hat.description %></p>
             <p><%= @hat.description %></p>
           </div>
           <div>
-            <h3><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= review_count %> reviews)</h3>
+            <h4><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= review_count %> reviews)</h4>
             <% @reviews.each do |review| %>
               <div>
                 <% rating = review.rating %>
@@ -37,8 +38,8 @@
             <% end %>
           </div>
       </div>
-    <div class="p-3 col-sm-3">
-      <div class="bg-light shadow p-3 mb-5 bg-body-tertiary rounded border border-secondary-subtle sticky-lg-top">
+    <div class="p-2 col-sm-3">
+      <div class="bg-light shadow p-3 mb-5 bg-body-tertiary rounded border border-secondary-subtle sticky-lg-top z-0">
         <div class="flex">
           <div class="flex align">
             <p><%= number_to_currency(@hat.day_rate, unit: "£") %> / day</p>

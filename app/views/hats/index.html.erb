@@ -15,7 +15,7 @@
       <div class="col-md-4">
         <div class="hat-card">
           <%= link_to hat_path(hat) do %>
-            <div class="hat-card-image rounded-4" style="background-image: url('<%= cl_image_path hat.photo.key, height: 300, crop: :fill %>')"> <h4 class="hat-card-type"><%= hat.type %></h4></div>
+            <div class="hat-card-image rounded-4" style="background-image: url('<%= cl_image_path hat.photo.key, crop: :fill %>')"> <p class="hat-card-type"><%= hat.type %></p></div>
             <div class="hat-card-content">
               <div class="hat-card-title">
                 <div class="flex">
