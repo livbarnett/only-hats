@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_093807) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_14_173241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_093807) do
   create_table "bookings", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
-    t.boolean "status"
+    t.boolean "status", default: false
     t.bigint "user_id", null: false
     t.bigint "hat_id", null: false
     t.datetime "created_at", null: false
@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_093807) do
     t.float "day_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -70,6 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_093807) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "booking_id", null: false
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,4 +95,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_093807) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "hats"
   add_foreign_key "bookings", "users"
+  add_foreign_key "reviews", "bookings"
 end

@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :date_of_birth, :bio])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name date_of_birth bio photo])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :bio])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name bio photo])
   end
 end

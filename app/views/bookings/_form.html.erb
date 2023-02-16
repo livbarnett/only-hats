@@ -1,15 +1,5 @@
-<%= simple_form_for [@hat, @booking] do |f| %>
-<div class="book-form">
-      <div class="small-form-box">
-        <div class="booking-input-box my-3 small-form-input">
-          <%= f.input :start_date, as: :date, html5: true %>
-        </div>
-        <div class="booking-input-box my-3 small-form-input">
-          <%= f.input :end_date, as: :date, html5: true %>
-        </div>
-      <div id="submit-btn">
-        <%= f.submit "Reserve hat", class: "btn btn-primary row-form-btn" %>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= simple_form_for [@hat, @booking], data: { controller: 'flatpickr' } do |f| %>
+    <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startDate" } }, label: "Hat-in" %>
+    <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" } }, label: "Hatout" %>
+    <%= f.submit "Reserve hat", class: "btn btn-primary row-form-btn mb-3" %>
+<% end %>

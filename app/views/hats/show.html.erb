@@ -1,22 +1,55 @@
+<% ratings = @reviews.pluck(:rating) %>
+      <% total_ratings = ratings.sum %>
+      <% review_count = @reviews.count %>
+      <% average_rating = total_ratings.to_f / review_count %>
+
 <div class="container mt-3">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2><%= @hat.description %></h2>
-      <i class="fa-solid fa-star"></i>
-      <span><%= rand(3..5) %> (<%= rand(1..100) %>)</span>
-      <span><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= @hat.location %></span>
-      <div class="hat-show-image rounded-4" style="background-image: url('<%= cl_image_path @hat.photo.key, height: 800, crop: :fill %>')"> <h4 class="hat-show-type"><%= @hat.type %></h4></div>
-          <div class="hat-card-content">
-            <div class="hat-card-title">
-            </div>
-            <%= @hat.size %>cm · <%= @hat.color %>
-          </div>
+  <div class="row justify-content-evenly">
+    <div class="p-2 col-sm-7">
+      <h2><%= @hat.name %></h2>
+        <p class="lead"><i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= @hat.location %></p>
     </div>
-    <div class="col-sm-4">
-      <h3>Book this hat</h3>
-      <p><%= number_to_currency(@hat.day_rate, unit: "£") %> / day</p>
-      <%= render 'bookings/form' %>
-      <%= link_to "All Hats", hats_path %>
+    <div class="p-2 col-sm-3">
+    </div>
+  </div>
+  <div class="row justify-content-evenly">
+    <div class="p-2 col-sm-7">
+      <div class="hat-show-image mb-3" style="background-image: url('<%= cl_image_path @hat.photo.key, crop: :fill %>')"></div>
+          <div class="border-bottom border-secondary-subtle mb-3">
+            <p class="text-muted"><%= @hat.type %> · <%= @hat.size %>cm · <%= @hat.color %></p>
+          </div>
+          <div class="border-bottom border-secondary-subtle mb-3">
+            <p><%= @hat.description %></p>
+            <p><%= @hat.description %></p>
+          </div>
+          <div>
+            <h4><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= review_count %> reviews)</h4>
+            <% @reviews.each do |review| %>
+              <div>
+                <% rating = review.rating %>
+                <% (1..rating).each do %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+                <% (rating...5).each do %>
+                  <i class="far fa-star"></i>
+                <% end %>
+                <p><%= review.content %></p>
+              </div>
+            <% end %>
+          </div>
+      </div>
+    <div class="p-2 col-sm-3">
+      <div class="bg-light shadow p-3 mb-5 bg-body-tertiary rounded border border-secondary-subtle sticky-lg-top z-0">
+        <div class="flex">
+          <div class="flex align">
+            <p><%= number_to_currency(@hat.day_rate, unit: "£") %> / day</p>
+          </div>
+          <div class="flex align">
+            <p><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= review_count %> reviews)</p>
+          </div>
+        </div>
+        <%= render 'bookings/form' %>
+      </div>
     </div>
   </div>
 </div>
