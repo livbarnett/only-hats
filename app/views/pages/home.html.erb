@@ -9,24 +9,27 @@
   </div>
 </div>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between card-container">
       <% @hats.each do |hat| %>
-        <%= link_to hat_path(hat) do %>
-          <div class="card-product">
-            <img src= <%= cl_image_path hat.photo.key %> />
-            <div>
-              <h2><%= hat.location %></h2>
-              <p><%= hat.description %></p>
-              <p><%= hat.size %></p>
-              <p>£<%=hat.day_rate%></h2>
+          <% reviews = hat.bookings.map(&:review).compact %>
+          <% ratings = reviews.pluck(:rating) %>
+          <% total_ratings = ratings.sum %>
+          <% review_count = reviews.count %>
+          <% average_rating = total_ratings.to_f / review_count %>
+            <div class="card-product">
+              <%= link_to hat_path(hat) do %>
+              <img src= <%= cl_image_path hat.photo.key %> />
+              <div class="product-info">
+                <div class="d-flex justify-content-between">
+                  <p class="product-name"><%= hat.name %></p>
+                  <p class="product-price">£<%=hat.day_rate%></p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p class="product-location"><%= hat.location%></p>
+                  <p class="product-rating"><%= average_rating %><i class="fa-solid fa-star"></i></p>
+                </div>
+              </div>
             </div>
-          </div>
         <% end %>
       <% end %>
     </div>
-
-
-
-
-
-    <%# <button>Browse our body of work</button> %>
