@@ -1,49 +1,35 @@
 <div class="container mt-3">
-  <div class="row">
-    <div class="col-6 my-2 mx-auto">
-      <%= form_with url: hats_path, method: :get, class: "d-flex" do %>
+    <div class="row">
+      <div class="col-6 my-2 mx-auto">
+        <%= form_with url: hats_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "True hat love starts here" %>
         <%= submit_tag "Search", class: "btn btn-primary ms-2" %>
       <% end %>
     </div>
   </div>
-  <div class="row">
-    <% @hats.each do |hat| %>
-      <% reviews = hat.bookings.map(&:review).compact %>
-      <% ratings = reviews.pluck(:rating) %>
-      <% total_ratings = ratings.sum %>
-      <% review_count = reviews.count %>
-      <% average_rating = total_ratings.to_f / review_count %>
-      <div class="col-md-4">
-        <div class="hat-card">
-          <%= link_to hat_path(hat) do %>
-            <div class="hat-card-image rounded-4" style="background-image: url('<%= cl_image_path hat.photo.key, crop: :fill %>')"> <p class="hat-card-type"><%= hat.type %></p></div>
-            <div class="hat-card-content">
-              <div class="hat-card-title">
-                <div class="flex">
-                  <div class="flex align">
-                    <p class="lead"><%= hat.name %></p>
-                  </div>
-                  <div class="flex align">
-                    <i class="fa-solid fa-star"></i> <%= average_rating %>
-                  </div>
-                </div>
+</div>
+
+<div class="card-container d-flex justify content between">
+      <% @hats.each do |hat| %>
+        <% reviews = hat.bookings.map(&:review).compact %>
+        <% ratings = reviews.pluck(:rating) %>
+        <% total_ratings = ratings.sum %>
+        <% review_count = reviews.count %>
+        <% average_rating = total_ratings.to_f / review_count %>
+          <div class="card-product">
+            <%= link_to hat_path(hat) do %>
+            <img src= <%= cl_image_path hat.photo.key %> />
+            <div class="product-info">
+              <div class="d-flex justify-content-between">
+                <p class="product-name"><%= hat.name %></p>
+                <p class="product-price"><%= number_to_currency(hat.day_rate, unit: "£") %></p>
               </div>
-            <%= hat.size %>cm · <%= hat.color %>
-          </div>
-          <div class="hat-card-actions">
-            <div class="flex">
-              <div class="flex align">
-                <i class="fa-sharp fa-solid fa-location-dot me-1"></i> <%= hat.location %>
-              </div>
-              <div class="flex align">
-                <%= number_to_currency(hat.day_rate, unit: "£") %> / day
-              </div>
+            <div class="d-flex justify-content-between">
+              <p class="product-location"><%= hat.location%></p>
+              <p class="product-rating"><%= average_rating %><i class="fa-solid fa-star"></i></p>
             </div>
           </div>
-          <% end %>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  </div>
 </div>
