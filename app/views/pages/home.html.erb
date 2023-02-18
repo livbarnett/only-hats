@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-
 <div class="banner">
   <div class="container">
     <h1>OnlyHats brings you headgear for all occasions</h1>
@@ -11,16 +10,31 @@
 </div>
 
 <div class="shpiel">
-<p style="text-align:center">Got a fancy dress party coming up? Looking for a hat for a day at the races?</p>
-<p style="text-align:center">We've got you covered at OnlyHats!</p>
+  <p style="text-align:center">Got a fancy dress party coming up? Looking for a hat for a day at the races?</p>
+  <p style="text-align:center">We've got you covered at OnlyHats!</p>
 </div>
 
-<div class="top-hat container">
- %>
-</div>
-
-
-
-
-
-    <%# <button>Browse our body of work</button> %>
+ <div class="d-flex justify-content-between card-container">
+      <% @hats.each do |hat| %>
+          <% reviews = hat.bookings.map(&:review).compact %>
+          <% ratings = reviews.pluck(:rating) %>
+          <% total_ratings = ratings.sum %>
+          <% review_count = reviews.count %>
+          <% average_rating = total_ratings.to_f / review_count %>
+            <div class="card-product">
+              <%= link_to hat_path(hat) do %>
+              <img src= <%= cl_image_path hat.photo.key %> />
+              <div class="product-info">
+                <div class="d-flex justify-content-between">
+                  <p class="product-name"><%= hat.name %></p>
+                  <p class="product-price">£<%=hat.day_rate%></p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <p class="product-location"><%= hat.location%></p>
+                  <p class="product-rating"><%= average_rating %><i class="fa-solid fa-star"></i></p>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      <% end %>
+    </div>
