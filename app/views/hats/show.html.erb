@@ -23,7 +23,7 @@
             <p><%= @hat.description %></p>
           </div>
           <div>
-            <h4><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= review_count %> reviews)</h4>
+            <h4><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= pluralize review_count, "review" %>)</h4>
             <% @reviews.each do |review| %>
               <div>
                 <% rating = review.rating %>
@@ -39,13 +39,13 @@
           </div>
       </div>
     <div class="p-2 col-sm-3">
-      <div class="bg-light shadow p-3 mb-5 bg-body-tertiary rounded border border-secondary-subtle sticky-lg-top z-0">
+      <div class="sticky-booking-form bg-light shadow p-3 mb-5 bg-body-tertiary rounded border border-secondary-subtle">
         <div class="flex">
           <div class="flex align">
             <p><%= number_to_currency(@hat.day_rate, unit: "£") %> / day</p>
           </div>
           <div class="flex align">
-            <p><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= review_count %> reviews)</p>
+            <p><i class="fa-solid fa-star"></i> <%= average_rating %> · (<%= pluralize review_count, "review" %>)</p>
           </div>
         </div>
         <%= render 'bookings/form' %>

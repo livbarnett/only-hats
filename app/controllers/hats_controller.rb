@@ -1,10 +1,13 @@
 class HatsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
 
   def index
-    @hats = Hat.all
-    @search = params["search"]
-    if @search.present?
-      @hats = @hats.where("name ILIKE ?", "%#{@search}%")
+    if params[:type].present?
+      @hats = Hat.hat_type_search(params[:type])
+    elsif params[:query].present?
+      @hats = Hat.hat_search(params[:query])
+    else
+      @hats = Hat.all
     end
   end
 
