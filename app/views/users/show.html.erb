@@ -1,41 +1,42 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row">
     <div class="col-md-8">
       <h1>Hi, I am <%= @user.first_name %></h1>
       <p><strong>Bio:</strong> <%= @user.bio %></p>
-      <h2>Bookings</h2>
-      <% if @user.bookings.any? %>
-        <ul>
-          <% @user.bookings.each do |booking| %>
-            <li><%= booking.start_date %> to <%= booking.end_date %> - <%= booking.hat.type %></li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>No bookings found.</p>
-      <% end %>
     </div>
     <div class="col-md-4">
       <div class="avatar-wrapper">
-        <%= cl_image_tag current_user.photo.key, width: 550, height: 550, crop: :thumb, gravity: :face, class: "avatar" %>
+        <%= cl_image_tag current_user.photo.key, width: 550, height: 550, crop: :thumb, gravity: :face, class: "avatar-square" %>
       </div>
     </div>
   </div>
-</div>
 
 <div class="bookings-list">
-  <h2>Bookings</h2>
+  <h2>My bookings</h2>
   <% if @user.bookings.any? %>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row">
       <% @user.bookings.each do |booking| %>
-        <div class="col">
-          <div class="card">
-            <%= cl_image_tag booking.hat.photo.key, width: 500, height: 500, crop: :fill, class: "card-img-top" %>
-            <div class="card-body">
-              <h5 class="card-title"><%= booking.hat.type %></h5>
-              <p class="card-text">
-                <%= booking.start_date %> - <%= booking.end_date %>
-              </p>
-              <a href="#" class="btn btn-primary">View booking</a>
+        <div class="col-md-4">
+          <div class="hat-card">
+            <div class="hat-card-image rounded-4" style="background-image: url('<%= cl_image_path booking.hat.photo.key, crop: :fill %>')"></div>
+            <div class="hat-card-content">
+              <h5 class="hat-card-title"><%= booking.hat.name %></h5>
+              <div class="mb-3">
+                <%= booking.start_date.strftime("%d %B %Y") %> - <%= booking.end_date.strftime("%d %B %Y") %> ·
+                <% num_days = (booking.end_date.to_date - booking.start_date.to_date).to_i %>
+                <%= number_to_currency(booking.hat.day_rate * num_days, unit: "£") %>
+              </div>
+              <% if booking.end_date < Time.now && booking.review.nil? && booking.status == true %>
+                <%= link_to "Review hat", new_booking_review_path(booking_id: booking.id), class: "btn btn-primary" %>
+              <% elsif booking.end_date < Time.now && booking.review %>
+                <%= link_to "Review submitted", hat_path(booking.hat), class: "btn btn-primary" %>
+              <% elsif booking.status == false %>
+                <%= "Booking declined" %>
+              <% elsif booking.status == true %>
+                <%= "Booking accepted" %>
+              <% else %>
+                <%= "Booking pending" %>
+              <% end %>
             </div>
           </div>
         </div>
