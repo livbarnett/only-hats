@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.hat = @hat
     if @booking.save
-      redirect_to bookings_path, notice: "Booking request was successfully made."
+      redirect_to hat_path(@booking.hat), notice: "Booking request was successfully made."
     else
       redirect_to hat_path(@booking.hat), alert: "Booking could not be created."
     end
