@@ -3,7 +3,7 @@
     <div class="col-6 my-2 mx-auto">
       <%= form_with url: hats_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "True hat love starts here" %>
-        <%= submit_tag "Search", class: "btn btn-primary" %>
+        <%= submit_tag "Search", class: "btn btn-primary ms-2" %>
       <% end %>
     </div>
   </div>
