@@ -70,8 +70,24 @@
   width: 40px;
 }
 
-// .flexbox {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// }
+.btn-flat {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: #38b6ff;
+  transition: background 0.3s ease;
+}
+
+.btn-flat:hover {
+  background: #4d04c4;
+  color: white;
+}
+
+.shpiel {
+  color: #4d04c4;
+  margin-top: 32px;
+}
+
+.btn btn-flat {
+  align: center;
+}

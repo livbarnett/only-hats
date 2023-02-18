@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Hi, I am <%= @user.first_name %></h1>
+      <p><strong>Bio:</strong> <%= @user.bio %></p>
+      <h2>Bookings</h2>
+      <% if @user.bookings.any? %>
+        <ul>
+          <% @user.bookings.each do |booking| %>
+            <li><%= booking.start_date %> to <%= booking.end_date %> - <%= booking.hat.type %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No bookings found.</p>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <div class="avatar-wrapper">
+        <%= cl_image_tag current_user.photo.key, width: 550, height: 550, crop: :thumb, gravity: :face, class: "avatar" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bookings-list">
+  <h2>Bookings</h2>
+  <% if @user.bookings.any? %>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @user.bookings.each do |booking| %>
+        <div class="col">
+          <div class="card">
+            <%= cl_image_tag booking.hat.photo.key, width: 500, height: 500, crop: :fill, class: "card-img-top" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= booking.hat.type %></h5>
+              <p class="card-text">
+                <%= booking.start_date %> - <%= booking.end_date %>
+              </p>
+              <a href="#" class="btn btn-primary">View booking</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No bookings found.</p>
+  <% end %>
+</div>
