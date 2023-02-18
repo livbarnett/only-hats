@@ -22,9 +22,11 @@
             <div class="hat-card-content">
               <h5 class="hat-card-title"><%= booking.hat.name %></h5>
               <div class="mb-3">
-                <%= booking.start_date.strftime("%d %B %Y") %> - <%= booking.end_date.strftime("%d %B %Y") %> ·
-                <% num_days = (booking.end_date.to_date - booking.start_date.to_date).to_i %>
-                <%= number_to_currency(booking.hat.day_rate * num_days, unit: "£") %>
+                <% if booking.hat.day_rate %>
+                  <%= booking.start_date.strftime("%d %B %Y") %> - <%= booking.end_date.strftime("%d %B %Y") %> ·
+                  <% num_days = (booking.end_date.to_date - booking.start_date.to_date).to_i %>
+                  <%= number_to_currency(booking.hat.day_rate * num_days, unit: "£") %>
+                <% end %>
               </div>
               <% if booking.end_date < Time.now && booking.review.nil? && booking.status == true %>
                 <%= link_to "Review hat", new_booking_review_path(booking_id: booking.id), class: "btn btn-primary" %>

@@ -4,11 +4,9 @@
       <%= image_tag "logo_hats.png", alt: "Only Hats"%>
     <% end %>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <div id="navbarSupportedContent">
       <ul class="navbar-nav me-auto align-items-center">
         <% if user_signed_in? %>
            <li class="nav-item">
@@ -23,18 +21,17 @@
           <li class="nav-item">
             <%= link_to "Formal", hats_path(type: "formal"), class: "nav-link" %>
           </li>
-          <li class="nav-item dropdown">
-            <% if current_user.photo.attached? %>
-            <%= cl_image_tag current_user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <li class="nav-item">
+            <%= link_to users_show_path do %>
+              <% if current_user.photo.attached? %>
+                <%= cl_image_tag current_user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, class: "avatar", id: "navbarDropdown" %>
+              <% else %>
+                <%= link_to "Profile", users_show_path, class: "nav-link" %>
+              <% end %>
             <% end %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Bookings", bookings_path, class: "dropdown-item" %>
-              <%= link_to "My profile", users_show_path, class: "dropdown-item" %>
-              <%= link_to "Edit profile", edit_user_registration_path, class: "dropdown-item" %>
-              <hr class="dropdown-divider">
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
           </li>
+
+
           <% else %>
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
